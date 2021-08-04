@@ -41,7 +41,7 @@ export default {
         {
           title: '签署协议',
           to: {
-            name: 'Home'
+            name: 'sign'
           },
           icon: 'user-o'
         }
