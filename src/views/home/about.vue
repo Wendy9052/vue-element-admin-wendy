@@ -8,7 +8,9 @@
         <div class="line"></div>
         <!-- 3个圆点 -->
         <div class="dot_box">
-          <div class="dot"></div>
+          <div class="dot">
+            <img :src="tick_icon" alt="">
+          </div>
           <div class="dot dot_active"></div>
           <div class="dot"></div>
         </div>
@@ -28,10 +30,18 @@
       <!-- 人面像 -->
       <div class="id_card">
         <img :src="id_head" alt="">
+        <div class="camera_box">
+          <img :src="camera" alt="">
+          <div class="tips_msg">点击拍摄身份证人像面</div>
+        </div>
       </div>  
       <!-- 国徽 -->
       <div class="id_card">
         <img :src="id_badge" alt="">
+        <div class="camera_box">
+          <img :src="camera" alt="">
+          <div class="tips_msg">点击拍摄身份证国徽面</div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,6 +56,8 @@ import topBar from '@/components/topBar'
 import id_head from "@/assets/img/id_head.png"
 import id_badge from "@/assets/img/id_badge.png"
 import camera from "@/assets/img/camera.png"
+import tick_icon from "@/assets/img/tick_s.png"
+
 
 export default {
   data() {
@@ -53,7 +65,8 @@ export default {
       title: '生命绿洲众包信息注册',
       id_head:id_head,
       id_badge:id_badge,
-      camera:camera
+      camera:camera,
+      tick_icon:tick_icon
     }
   },
   components: {
@@ -89,15 +102,28 @@ export default {
   display: flex;  
   flex-direction: column;
   align-items: center;
-  .id_head{
-    
-  }
+  position: relative;
+  
   .id_card{
-    // width: 75%;
-    // height: 142px;
-    // box-shadow: 0 0 10px #ccc;
     margin-top: 30px;
     margin-bottom: 14px;
+    width: auto;
+    height: auto;
+    position: relative;
+    .camera_box{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 100%;
+      .tips_msg{
+        font-size: 15px;
+        color: #1CB49D;
+        width: 100%;
+        font-family: PingFangSC-Medium;
+        margin-top: 11px;
+      }
+    }
   }
   text-align: center;
   margin-top: 25px;
@@ -139,6 +165,17 @@ export default {
         background: #fff;
         border-radius: 50%;
         margin-top: -10px;
+        color: #1CB49D;
+        font-weight: bold;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+          width: 100%;
+          height: 100%;
+          margin: 5px;
+        }
       }
       .dot_active {
         width: 12px;
