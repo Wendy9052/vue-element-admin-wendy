@@ -26,9 +26,13 @@
     <div class="upload_box">
       <div class="upload_text">上传身份证照片</div>
       <!-- 人面像 -->
-      <div class="id_card"></div>
+      <div class="id_card">
+        <img :src="id_head" alt="">
+      </div>  
       <!-- 国徽 -->
-      <div class="id_card"></div>
+      <div class="id_card">
+        <img :src="id_badge" alt="">
+      </div>
     </div>
   </div>
 </template>
@@ -39,10 +43,17 @@ import { getUserInfo } from '@/api/user.js'
 import { mapGetters } from 'vuex'
 import topBar from '@/components/topBar'
 
+import id_head from "@/assets/img/id_head.png"
+import id_badge from "@/assets/img/id_badge.png"
+import camera from "@/assets/img/camera.png"
+
 export default {
   data() {
     return {
-      title: '生命绿洲众包信息注册'
+      title: '生命绿洲众包信息注册',
+      id_head:id_head,
+      id_badge:id_badge,
+      camera:camera
     }
   },
   components: {
@@ -75,13 +86,16 @@ export default {
 </script>
 <style lang="scss">
 .upload_box{
-  display: flex;
+  display: flex;  
   flex-direction: column;
   align-items: center;
+  .id_head{
+    
+  }
   .id_card{
-    width: 75%;
-    height: 142px;
-    box-shadow: 0 0 10px #ccc;
+    // width: 75%;
+    // height: 142px;
+    // box-shadow: 0 0 10px #ccc;
     margin-top: 30px;
     margin-bottom: 14px;
   }
