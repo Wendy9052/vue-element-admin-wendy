@@ -105,7 +105,7 @@ export default {
   position: relative;
   
   .id_card{
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 14px;
     width: auto;
     height: auto;

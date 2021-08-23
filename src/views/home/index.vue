@@ -43,13 +43,37 @@
         <li>
           <div class="msg_title"><span>*</span>开户行</div>
           <input type="text" value="" placeholder="请输入您的开户行">
-
+          
         </li>
       </ul>
     </div>
+    <van-field
+      v-model="fieldValue"
+      is-link
+      readonly
+      label="地区"
+      placeholder="请选择所在地区"
+      @click="show = true"
+    />
+    <van-popup v-model="show" round position="bottom">
+      <van-cascader
+        v-model="cascaderValue"
+        title="请选择所在地区"
+        :options="options"
+        @close="show = false"
+        @finish="onFinish"
+      />
+    </van-popup>
     <div class="tips_msg">
       <div class="tips_icon">!</div>
       <div class="tips_text">身份信息及银行卡信息会做公安系统验真</div>
+    </div>
+
+    <div class="btn_box">
+      <button class="pre_step">返回</button>
+      <!-- <router-link to="/about"> -->
+        <button class="next_step" @click="nextStep">下一步</button>
+      <!-- </router-link> -->
     </div>
   </div>
 </template>
@@ -57,26 +81,90 @@
 <script>
 // import { XInput,Group } from 'vux'
 // import { PopupPicker } from 'vux'
+import Vue from 'vue';
+import { Cascader,Field  } from 'vant';
+
+// Vue.use(Cascader);
+// Vue.use(Field);
+
 import topBar from '@/components/topBar'
 export default {
   data() {
     return {
-      title:"生命绿洲众包信息注册"
+      title:"生命绿洲众包信息注册",
+      show: false,
+      fieldValue: '',
+      cascaderValue: '',
+      // 选项列表，children 代表子选项，支持多级嵌套
+      options: [
+        {
+          text: '浙江省',
+          value: '330000',
+          children: [{ text: '杭州市', value: '330100' }],
+        },
+        {
+          text: '江苏省',
+          value: '320000',
+          children: [{ text: '南京市', value: '320100' }],
+        },
+      ],
     }
   },
   components:{
-    topBar
+    topBar,
+    // Cascader,
+    Field 
   },
 
   computed: {},
 
   mounted() { },
 
-  methods: {}
+  methods: {
+    nextStep(){
+      
+    },
+    // 全部选项选择完毕后，会触发 finish 事件
+    onFinish({ selectedOptions }) {
+      this.show = false;
+      this.fieldValue = selectedOptions.map((option) => option.text).join('/');
+    },
+  }
 }
 </script>
 <style lang="scss" scoped>
 .index-container {
+  .btn_box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0px -1px 0px 0px #ccc;
+    padding: 8px 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    
+    .pre_step{
+      height: 44px;
+      width: 30%;
+      border: 0.5px solid rgba(28, 180, 157, 1);
+      border-radius: 22px;
+      background-color: rgba(255, 255, 255, 1);
+      color: rgba(28, 180, 157, 100);
+      font-size: 15px;
+      text-align: center;
+      font-family: PingFangSC-Medium;
+    }
+    .next_step{
+      height: 44px;
+      width: 60%;
+      background-color: rgba(28, 180, 157, 1);
+      border-radius: 22px;
+      color: rgba(255, 255, 255, 100);
+      border: 0.5px solid rgba(28, 180, 157, 1);
+    }
+  }
   .tips_msg{
     display: flex;
     align-items: center;
